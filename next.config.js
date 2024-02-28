@@ -6,13 +6,7 @@ const nextConfig = {
   swcMinify: true,
   optimizeFonts: true,
   images: {
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "m.media-amazon.com",
-      },
-    ],
-    minimumCacheTTL: 15000000,
+    domains: ["m.media-amazon.com", "lh3.googleusercontent.com"],
   },
 };
 
