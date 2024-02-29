@@ -27,8 +27,15 @@ interface Props {
 
 export const CartContextProvider = (props: Props) => {
 
-    const [cartTotalQuantity, setCartTotalQuantity] = useState(10)
+    const [cartTotalQuantity, setCartTotalQuantity] = useState(0)
     const [cartProducts, setCartProducts] = useState<CartProductType[] | null>(null)
+
+    const [cartTotalAmount, setCartTotalAmount] = useState(0);
+
+
+
+    console.log('qty', cartTotalQuantity)
+    console.log('amount', cartTotalAmount)
 
     useEffect(() => {
         const cartItems: any = localStorage.getItem('gadgStoreCartItems')
@@ -36,6 +43,29 @@ export const CartContextProvider = (props: Props) => {
 
         setCartProducts(cProducts)
     }, [])
+
+    useEffect(() => {
+        const getTotals = () => {
+            if (cartProducts) {
+                const { total, qty } = cartProducts?.reduce(
+                    (acc, item) => {
+                        const itemTotal = item.price * item.quantity
+                        acc.total += itemTotal
+                        acc.qty += item.quantity
+
+
+                        return acc
+                    }, {
+                    total: 0,
+                    qty: 0
+                }
+                )
+                setCartTotalQuantity(qty)
+                setCartTotalAmount(total)
+            }
+        }
+        getTotals()
+    }, [cartProducts])
 
     const handleAddProductToCart = useCallback((product: CartProductType) => {
         setCartProducts((prev) => {
