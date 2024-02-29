@@ -22,8 +22,8 @@ export default function RootLayout({
       <body className={`${poppins.className} text-slate-700`}>
         <Toaster toastOptions={{
           style: {
-            background: 'blue',
-            color: 'white'
+            background: 'white',
+            color: 'blue'
           }
         }} />
         <CartProvider>

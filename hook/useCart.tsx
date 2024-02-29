@@ -12,6 +12,10 @@ type CartContextType = {
     cartTotalQuantity: number
     cartProducts: CartProductType[] | null
     handleAddProductToCart: (product: CartProductType) => void
+    handleRemoveProductFromCart: (product: CartProductType) => void
+    handleQuantityCartIncrease: (product: CartProductType) => void
+    handleQuantityCartDecrease: (product: CartProductType) => void
+    handleClearCart: () => void
 }
 
 export const CartContext = createContext<CartContextType | null>(null);
@@ -49,10 +53,72 @@ export const CartContextProvider = (props: Props) => {
         })
     }, [])
 
+    const handleRemoveProductFromCart = useCallback((product: CartProductType) => {
+        if (cartProducts) {
+            const filteeredProduct = cartProducts.filter((item) => {
+                return item.id !== product.id
+            })
+
+            setCartProducts(filteeredProduct)
+            toast.success("Product removed from Cart")
+            localStorage.setItem('gadgStoreCartItems', JSON.stringify(filteeredProduct))
+
+        }
+    }, [cartProducts])
+
+    const handleQuantityCartIncrease = useCallback((product: CartProductType) => {
+        let updatedCart;
+
+        if (product.quantity === 99) {
+            return toast.error("maximum reached")
+        }
+
+        if (cartProducts) {
+            updatedCart = [...cartProducts]
+            const existingIndex = updatedCart.findIndex((item) => item.id === product.id)
+            if (existingIndex > -1) {
+                updatedCart[existingIndex].quantity = updatedCart[existingIndex].quantity + 1
+            }
+            setCartProducts(updatedCart)
+            localStorage.setItem('gadgStoreCartItems', JSON.stringify(updatedCart))
+        }
+    }, [cartProducts])
+    const handleQuantityCartDecrease = useCallback((product: CartProductType) => {
+        // if (product.quantity === 1) {
+        //     return
+        // }
+
+        let updatedCart;
+
+        if (product.quantity === 1) {
+            return toast.error("minimum reached")
+        }
+
+        if (cartProducts) {
+            updatedCart = [...cartProducts]
+            const existingIndex = updatedCart.findIndex((item) => item.id === product.id)
+            if (existingIndex > -1) {
+                updatedCart[existingIndex].quantity = updatedCart[existingIndex].quantity - 1
+            }
+            setCartProducts(updatedCart)
+            localStorage.setItem('gadgStoreCartItems', JSON.stringify(updatedCart))
+        }
+    }, [cartProducts])
+
+    const handleClearCart = useCallback(() => {
+        setCartProducts(null)
+        setCartTotalQuantity(0)
+        localStorage.setItem('gadgStoreCartItems', JSON.stringify(null))
+    }, [cartProducts])
+
     const value = {
         cartTotalQuantity,
         cartProducts,
         handleAddProductToCart,
+        handleRemoveProductFromCart,
+        handleQuantityCartIncrease,
+        handleQuantityCartDecrease,
+        handleClearCart
 
     }
 

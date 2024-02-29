@@ -90,7 +90,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
         })
     }, [cartProduct])
     const handleQuantityDecreace = useCallback(() => {
-        if (cartProduct.quantity == 1) {
+        if (cartProduct.quantity === 1) {
             return
         }
         setCartProduct((prev) => {
