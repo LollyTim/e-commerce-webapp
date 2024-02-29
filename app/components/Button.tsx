@@ -7,7 +7,7 @@ interface ButtonProps {
     disabled?: boolean
     outline?: boolean
     small?: boolean
-    custom: boolean
+    custom?: boolean
     icon?: IconType
     onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
@@ -15,7 +15,7 @@ interface ButtonProps {
 
 const Button: React.FC<ButtonProps> = ({ label, disabled, outline, small, custom, icon: Icon, onClick }) => {
     return (
-        <button disabled={disabled} className={` disabled:opacity-70 disabled:cursor-not-allowed rounded-md hover:opacity-8 transition w-full  border-slate-700 justify-center items-center flex gap-2 
+        <button onClick={onClick} disabled={disabled} className={` disabled:opacity-70 disabled:cursor-not-allowed rounded-md hover:opacity-8 transition w-full  border-slate-700 justify-center items-center flex gap-2 
         ${outline ? "bg-white" : "bg-slate-700"} 
         ${outline ? "text-slate-700" : " text-white"} 
         ${small ? "text-sm font-light" : "text-md font-medium"} 
