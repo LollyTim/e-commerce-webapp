@@ -1,3 +1,15 @@
 @tailwind base;
+
+:root {
+    --fallback-b1: white;
+    /* Change background color to white */
+    --fallback-bc: white;
+    /* Change text color to black */
+}
+
 @tailwind components;
 @tailwind utilities;
+
+body {
+    background: white;
+}
