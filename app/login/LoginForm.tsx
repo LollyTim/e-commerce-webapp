@@ -10,12 +10,11 @@ import { AiOutlineGoogle } from "react-icons/ai"
 
 
 
-const RegisterForem = () => {
+const LoginForm = () => {
 
     const [isLoading, setIsLoading] = useState(false)
     const { register, handleSubmit, formState: { errors } } = useForm<FieldValues>({
         defaultValues: {
-            name: "",
             email: "",
             password: ""
         }
@@ -30,18 +29,17 @@ const RegisterForem = () => {
 
     return (
         <>
-            <Heading title="Sign up for Gadg-store" />
+            <Heading title="Sign in to Gadg-Store" />
             <hr className=" bg-slate-300  w-full h-px" />
-            <Input id="name" label="Name" disabled={isLoading} register={register} required errors={errors} />
             <Input id="email" label="Email" disabled={isLoading} type="email" register={register} required errors={errors} />
             <Input id="password" label="Password" type="password" disabled={isLoading} register={register} required errors={errors} />
-            <Button label={isLoading ? "Loading" : "Signup"} onClick={handleSubmit(onSubmit)} />
+            <Button label={isLoading ? "Loading" : "Login"} onClick={handleSubmit(onSubmit)} />
             <p className=" text-sm">
-                Already have an account? <Link className=" underline" href="/login">Login</Link> here!
+                Don't have an account ? <Link className=" underline" href="/register">Sign up</Link> here!
             </p>
-            <Button onClick={() => { }} small label="Signup with Google" outline icon={AiOutlineGoogle} />
+            <Button small onClick={() => { }} label="Continue with Google" outline icon={AiOutlineGoogle} />
         </>
     )
 }
 
-export default RegisterForem
+export default LoginForm
