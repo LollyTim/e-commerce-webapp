@@ -2,6 +2,7 @@ import Link from "next/link"
 import { Redressed } from "next/font/google"
 import Container from "../Container"
 import CartCount from "./CartCount"
+import UserMenu from "./UserMenu"
 
 const redressed = Redressed({ subsets: ['latin'], weight: ["400"] })
 const NavBar = () => {
@@ -15,7 +16,7 @@ const NavBar = () => {
                         <div className="hidden md:block">Search</div>
                         <div className=" flex items-center gap-8 md:gap-12">
                             <CartCount />
-                            <div>UserMenue</div>
+                            <UserMenu />
                         </div>
                     </div>
                 </Container>
