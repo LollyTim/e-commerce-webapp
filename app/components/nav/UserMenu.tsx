@@ -21,7 +21,7 @@ const UserMenue: React.FC<UserMenuProps> = ({ currentUser }) => {
     }, []);
 
     const fullName = currentUser.name
-    const firstName = fullName?.split(" ")[0];
+    const firstName = fullName?.split(" ")[0]
     return (
         <>
             <div className=" relative z-30">
