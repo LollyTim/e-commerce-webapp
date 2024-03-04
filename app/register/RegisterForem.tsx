@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Heading from "../components/Heading"
 import Input from "../components/inputs/input"
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form"
@@ -11,8 +11,13 @@ import axios from "axios"
 import toast from "react-hot-toast"
 import { signIn } from "next-auth/react"
 import { useRouter } from "next/navigation"
+import { SafeUser } from "@/types"
 
-const RegisterForem = () => {
+interface RegisterFormProps {
+    currentUser: SafeUser | null
+}
+
+const RegisterForem: React.FC<RegisterFormProps> = ({ currentUser }) => {
 
     const [isLoading, setIsLoading] = useState(false)
     const { register, handleSubmit, formState: { errors } } = useForm<FieldValues>({
@@ -23,6 +28,12 @@ const RegisterForem = () => {
         }
     })
     const router = useRouter()
+    useEffect(() => {
+        if (currentUser) {
+            router.push("/cart")
+            router.refresh()
+        }
+    })
 
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
         axios
@@ -53,6 +64,9 @@ const RegisterForem = () => {
             });
 
     }
+    if (currentUser) {
+        return <p className=" text-center justify-center">Registerted, Redirecting...</p>
+    }
 
     return (
         <>
@@ -65,7 +79,7 @@ const RegisterForem = () => {
             <p className=" text-sm">
                 Already have an account? <Link className=" underline" href="/login">Login</Link> here!
             </p>
-            <Button onClick={() => { }} small label="Signup with Google" outline icon={AiOutlineGoogle} />
+            <Button onClick={() => { signIn("google") }} small label="Signup with Google" outline icon={AiOutlineGoogle} />
         </>
     )
 }
