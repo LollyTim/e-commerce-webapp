@@ -20,7 +20,7 @@ const UserMenue: React.FC<UserMenuProps> = ({ currentUser }) => {
         setIsOpen((prev) => !prev);
     }, []);
 
-    const fullName = currentUser.name
+    const fullName = currentUser?.name
     const firstName = fullName?.split(" ")[0];
     return (
         <>
@@ -29,7 +29,7 @@ const UserMenue: React.FC<UserMenuProps> = ({ currentUser }) => {
                     onClick={toggleOpen}
                     className=" text-gray-100 flex p-2 border-[1px] flex-row items-center gap-1 rounded-full transition cursor-pointer hover:shadow-md "
                 >
-                    <Avatar src={currentUser.image} />
+                    <Avatar src={currentUser?.image} />
                     <p>{firstName}</p>
                     <AiFillCaretDown />
                 </div>
