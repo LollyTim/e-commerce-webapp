@@ -1,25 +1,13 @@
-import Image from "next/image"
-// import DSDS from "/_3de437ba-276e-45cc-a1ec-6928143ae60a.jpg"
+import React from "react";
 
 const FormWrap = ({ children }: { children: React.ReactNode }) => {
     return (
-        <div className=" min-h-fit w-[80%] flex justify-center items-center mx-auto pb-12 pt-24 h-full">
-            <div className=" max-w-[689px] md:p-8 w-[100%] flex flex-col justify-center items-center gap-6 shadow-xl shadow-slate-200 rounded-xl p-4  " >
+        <div className="min-h-fit h-full flex items-center justify-center p-12">
+            <div className="w-[650px] flex flex-col gap-6 items-center shadow-xl shadow-slate-200 rounded-md p-4 md:p-8">
                 {children}
             </div>
-            {/* <div className="">
-                <Image
-                    unoptimized={true}
-                    className=" rounded-tr-xl rounded-br-xl "
-                    src={"/_3de437ba-276e-45cc-a1ec-6928143ae60a.jpg"}
-                    width={400}
-                    height={400}
-                    alt="3de437ba-276e-45cc-a1ec-6928143ae60a"
-                />
-            </div> */}
-
         </div>
-    )
-}
+    );
+};
 
-export default FormWrap
+export default FormWrap;

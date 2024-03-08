@@ -25,23 +25,22 @@ const Input: React.FC<InputProps> = ({
 }) => {
     return (
         <div className="w-[80%]">
-            {/* <input
-              
-                className={` `}
-            />
-            <label htmlFor={id} className=" absolute cursor-text text-base duration-150 transform top-5 left-4 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:translate-y-4  -translate-y-3 z-10 origin-[0]  " >
+            <label
+                className={`${errors[id] ? "text-rose-500" : "text-sky-500"
+                    }  input input-bordered input-info flex items-center w-[full] max-w-[400px] gap-2`}
+            >
                 {label}
-            </label> */}
-
-            <label className={`   ${errors[id] ? "text-rose-500" : "text-slate-500"}  input input-bordered input-info flex items-center w-[300px] max-w-[400px] gap-2`}>
-                {label}
-                <input type={type}
+                <input
+                    type={type}
                     autoComplete="off"
                     id={id}
                     disabled={disabled}
                     {...register(id, { required })}
-                    placeholder="" className={` grow ${errors[id] ? "border-rose-400" : "border-slate-300"} 
-            ${errors[id] ? "focus:border-rose-400" : "focus:border-slate-300"}`} />
+                    placeholder=""
+                    className={` grow ${errors[id] ? "border-rose-400" : "border-slate-300"
+                        } 
+            ${errors[id] ? "focus:border-rose-400" : "focus:border-slate-300"}`}
+                />
             </label>
         </div>
     );
