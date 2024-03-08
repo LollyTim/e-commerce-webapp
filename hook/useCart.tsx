@@ -46,7 +46,7 @@ export const CartContextProvider = (props: Props) => {
     useEffect(() => {
         const cartItems: any = localStorage.getItem('gadgStoreCartItems')
         const cProducts: CartProductType[] | null = JSON.parse(cartItems)
-        const gadgStorePaymentIntent: any = localStorage.getItem("gadgStorePaymentIntent")
+        const gadgStorePaymentIntent: any = localStorage?.getItem("gadgStorePaymentIntent")
         const paymentIntent: string | null = JSON.parse(gadgStorePaymentIntent)
 
         setCartProducts(cProducts)

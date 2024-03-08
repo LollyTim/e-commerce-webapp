@@ -1,8 +1,14 @@
 "use client"
 import { useCart } from "@/hook/useCart"
+import { Elements } from "@stripe/react-stripe-js"
+import { StripeElementsOptions, loadStripe, } from "@stripe/stripe-js"
 import { useRouter } from "next/navigation"
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import toast from "react-hot-toast"
+import CheckoutForm from "./CheckoutForm"
+import Button from "../components/Button"
+
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string)
 
 
 const CheckoutClient = () => {
@@ -10,6 +16,8 @@ const CheckoutClient = () => {
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(false)
     const [clientSecret, setClientSecret] = useState('')
+    const [paymentSuccess, setPaymentSuccess] = useState(false)
+
     const router = useRouter()
 
 
@@ -45,9 +53,36 @@ const CheckoutClient = () => {
                 });
         }
     }, [cartProducts, paymentIntent]);
+    const options: StripeElementsOptions = {
+        clientSecret,
+        appearance: {
+            theme: "stripe",
+            labels: "floating"
+        }
+    }
+
+    const handleSetPaymentSuccess = useCallback((value: boolean) => {
+        setPaymentSuccess(value)
+    }, [])
 
     return (
-        <div>Checkout</div>
+        <div className="w-full">
+            {clientSecret && cartProducts && (
+                <Elements options={options} stripe={stripePromise}>
+                    <CheckoutForm
+                        clientSecret={clientSecret}
+                        handleSetPaymentSuccess={handleSetPaymentSuccess} />
+                </Elements>
+            )}
+            {loading && <div className=" text-center"> Loading Checkout...</div>}
+            {error && <div className=" text-center text-rose-500"> Sometning Went Wrong</div>}
+            {paymentSuccess && <div className=" flex items-center flex-col gap-4">
+                <div className=" text-teal-500 text-center">Payment Success</div>
+                <div className=" max-w-[220px] w-full ">
+                    <Button label="Vieew your Orders" onClick={() => router.push("/order")} />
+                </div>
+            </div>}
+        </div>
     )
 }
 

@@ -8,10 +8,15 @@ import Heading from "../components/Heading"
 import Button from "../components/Button"
 import ItemContent from "./ItemContent"
 import { formatPrice } from "@/utils/formatPrice"
+import { SafeUser } from "@/types"
+import { useRouter } from "next/navigation"
+interface CartClientProps {
+    currentUser: SafeUser | null
+}
 
-
-const CartClient = () => {
+const CartClient: React.FC<CartClientProps> = ({ currentUser }) => {
     const { cartProducts, handleClearCart, cartTotalAmount } = useCart()
+    const router = useRouter()
     if (!cartProducts || cartProducts.length === 0) {
         return (
             <div className="flex flex-col items-center ">
@@ -52,7 +57,7 @@ const CartClient = () => {
                         <span>{formatPrice(cartTotalAmount)}</span>
                     </div>
                     <p className=" text-slate-500">Taxes and shipping calculated at checkout</p>
-                    <Button label="Checkout" onClick={() => { }} />
+                    <Button label={currentUser ? " Checkout" : "Login To Chackout "} outline={currentUser ? false : true} onClick={() => { currentUser ? router.push("/checkout") : router.push("/login ") }} />
                     <Link href={"/"} className=" text-slate-500 text-center flex items-center f;ex gap-1 mt-2">
                         <MdArrowBack />
                         <span>Continue shopping</span>
