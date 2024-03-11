@@ -68,7 +68,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
                 setIsProductInCart(true)
             }
         }
-    }, [cartProducts])
+    }, [cartProducts, product.id])
 
     const handleColoSelect = useCallback(
         (value: SelectedImgType) => {
@@ -77,7 +77,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
                     ...prev, selectedImg: value
                 }
             })
-        }, [cartProduct.selectedImg])
+        }, [])
 
     const handleQuantityIncreace = useCallback(() => {
         if (cartProduct.quantity == 99) {

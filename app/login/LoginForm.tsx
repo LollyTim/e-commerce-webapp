@@ -33,7 +33,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ currentUser }) => {
             router.refresh()
         }
 
-    }, [])
+    }, [currentUser, router])
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
         {
             setIsLoading(true)
@@ -68,7 +68,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ currentUser }) => {
             <Input id="password" label="Password" type="password" disabled={isLoading} register={register} required errors={errors} />
             <Button label={isLoading ? "Loading" : "Login"} onClick={handleSubmit(onSubmit)} />
             <p className=" text-sm">
-                Don't have an account ? <Link className=" underline" href="/register">Sign up</Link> here!
+                Don&apo;t have an account ? <Link className=" underline" href="/register">Sign up</Link> here!
             </p>
             <Button small onClick={() => { signIn("google") }} label="Continue with Google" outline icon={AiOutlineGoogle} />
         </>

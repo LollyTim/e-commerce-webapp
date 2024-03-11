@@ -27,7 +27,7 @@ const Homebanner = () => {
         const intervalId = setInterval(changeImageLoop, 1000); // Change image every 2 seconds
 
         return () => clearInterval(intervalId); // Clear interval on unmount
-    }, []); // Empty dependency array ensures useEffect runs only once
+    }, [currentImage, imageUrls.length]); // Empty dependency array ensures useEffect runs only once
 
     const handleNext = () => {
         setCurrentImage((prevImage) => (prevImage + 1) % imageUrls.length);
