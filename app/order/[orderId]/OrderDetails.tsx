@@ -26,7 +26,7 @@ const OrderDetails: React.FC<OrderDetailsProps> = ({ order }) => {
                 Order Id: {order?.id}
             </div>
             <div>
-                Totla Amount <span className=' font-bold'>{formatPrice(order.amount)}</span>
+                Totla Amount <span className=' font-bold'>{formatPrice(order.amount / 100)}</span>
             </div>
             <div className=' flex gap-2 items-center '>
 
