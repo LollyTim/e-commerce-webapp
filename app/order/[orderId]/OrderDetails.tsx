@@ -10,7 +10,6 @@ import React from 'react'
 import { MdAccessTime, MdAccessTimeFilled, MdDeliveryDining, MdDone, MdDoneAll } from 'react-icons/md';
 import OrderItem from './OrderItem';
 
-
 interface OrderDetailsProps {
     order: Order;
 }
