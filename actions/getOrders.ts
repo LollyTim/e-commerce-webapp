@@ -1,4 +1,4 @@
-import prism from "@/libs/prismadb";
+import prisma from "@/libs/prismadb";
 export default async function getOrder() {
   try {
     const orders = await prisma?.order.findMany({
@@ -12,5 +12,6 @@ export default async function getOrder() {
     return orders;
   } catch (error: any) {
     throw new Error(error);
+    console.log("error at getorders>>>", error);
   }
 }
