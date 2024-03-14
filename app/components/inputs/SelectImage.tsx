@@ -1,4 +1,4 @@
-"use client"
+// "use client"
 import { ImageType } from "@/app/admin/add-products/AddProduceForm"
 import { useCallback } from "react"
 import { useDropzone } from "react-dropzone"
@@ -15,7 +15,7 @@ const SelectImage: React.FC<SelectImageProps> = ({ item, handleFileChange }) => 
         if (acceptedFiles.length > 0) {
             handleFileChange(acceptedFiles[0])
         }
-    }, [handleFileChange])
+    }, [])
     const { getRootProps, getInputProps, isDragActive } = useDropzone({
         onDrop,
         accept: { 'image/*': ['.jpeg', '.jpg', '.png'] },

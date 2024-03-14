@@ -19,13 +19,13 @@ import {
     ref,
     uploadBytesResumable,
 } from "firebase/storage";
-import { resolve } from "path";
+// import { resolve } from "path";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 
 export type ImageType = {
-    color?: string;
-    colorCode?: string;
+    color: string;
+    colorCode: string;
     image?: File | null;
 };
 export type UploadedImageType = {
@@ -53,7 +53,7 @@ const AddProduceForm = () => {
             name: "",
             description: "",
             category: "",
-            images: [],
+            image: [],
             brand: "",
             price: "",
             isStock: false,
@@ -61,16 +61,16 @@ const AddProduceForm = () => {
     });
 
     useEffect(() => {
-        setImages((prevImages) => prevImages); // Add 'prevImages' dependency
-    }, [images, setImages]);
+        setConstantValue("images", images); // Add 'prevImages' dependency
+    }, [images]);
 
     useEffect(() => {
         if (isProductCreated) {
-            // reset();
+            reset();
             setImages(null);
             setIsProductCreated(false);
         }
-    }, [isProductCreated]);
+    }, []);
 
     const onSubmit: SubmitHandler<FieldValues> = async (data) => {
         console.log("Product Data:", data);
@@ -86,6 +86,7 @@ const AddProduceForm = () => {
             return toast.error("Category s not selected");
         }
         if (!data.images || data.images.length === 0) {
+            setIsLoading(false);
             return toast.error("No Selected Image");
         }
         const handleImageUploads = async () => {
