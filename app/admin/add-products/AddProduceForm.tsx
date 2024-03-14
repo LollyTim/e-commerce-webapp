@@ -62,7 +62,7 @@ const AddProduceForm = () => {
 
     useEffect(() => {
         setConstantValue("images", images); // Add 'prevImages' dependency
-    }, [images]);
+    });
 
     useEffect(() => {
         if (isProductCreated) {
@@ -70,7 +70,7 @@ const AddProduceForm = () => {
             setImages(null);
             setIsProductCreated(false);
         }
-    }, []);
+    }, [reset, isProductCreated]);
 
     const onSubmit: SubmitHandler<FieldValues> = async (data) => {
         console.log("Product Data:", data);

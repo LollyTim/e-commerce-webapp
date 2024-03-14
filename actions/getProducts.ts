@@ -51,3 +51,16 @@ export default async function getProducts(params: IProductParams) {
     throw new Error(error);
   }
 }
+
+export async function getStaticProps(context: any) {
+  const searchParams = context.query;
+  const products = await getProducts(searchParams); // Fetch with dynamic data
+
+  return {
+    props: {
+      searchParams,
+      products,
+    },
+    revalidate: 60, // Revalidate data every 60 seconds (optional)
+  };
+}
